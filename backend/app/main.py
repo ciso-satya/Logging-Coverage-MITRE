@@ -5,8 +5,8 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import select
 
@@ -66,6 +66,14 @@ app.include_router(connections.router)
 app.include_router(coverage.router)
 app.include_router(mappings.router)
 app.include_router(export_router)
+
+
+@app.exception_handler(Exception)
+async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
+    """Log the full traceback and return the error type/message so the UI shows the cause,
+    not a bare 500. This is a self-hosted internal tool, so surfacing the reason is helpful."""
+    log.exception("Unhandled error on %s %s", request.method, request.url.path)
+    return JSONResponse(status_code=500, content={"detail": f"{type(exc).__name__}: {exc}"})
 
 
 @app.get("/api/health")

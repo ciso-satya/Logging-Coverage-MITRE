@@ -14,7 +14,9 @@ class Base(DeclarativeBase):
 
 engine = create_engine(
     f"sqlite:///{settings.db_path}",
-    connect_args={"check_same_thread": False},
+    # timeout: wait (seconds) for a locked DB instead of raising "database is locked".
+    # The first-run ATT&CK import is a large write; a page load during it must wait, not 500.
+    connect_args={"check_same_thread": False, "timeout": 30},
 )
 
 
@@ -22,6 +24,7 @@ engine = create_engine(
 def _sqlite_pragmas(dbapi_connection, _record):  # pragma: no cover - trivial
     cursor = dbapi_connection.cursor()
     cursor.execute("PRAGMA journal_mode=WAL")
+    cursor.execute("PRAGMA busy_timeout=30000")
     cursor.execute("PRAGMA foreign_keys=ON")
     cursor.close()
 
