@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/api.ts","./src/main.tsx","./src/types.ts","./src/components/Matrix.tsx","./src/components/Status.tsx","./src/components/TechniqueDrawer.tsx","./src/components/Tooltip.tsx","./src/pages/GapsPage.tsx","./src/pages/HeatmapPage.tsx","./src/pages/LogSourcesPage.tsx","./src/pages/RulesPage.tsx","./src/pages/SettingsPage.tsx"],"version":"5.9.3"}
