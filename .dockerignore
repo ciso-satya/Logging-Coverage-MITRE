@@ -1,6 +1,7 @@
 # Anchored to the build-context root with a leading slash so these never match
-# same-named directories deeper in the tree (e.g. backend/app/data, which ships
-# the log source catalog and MUST be included in the image).
+# same-named directories deeper in the tree. /data is the runtime DB + ATT&CK
+# cache dir, created at run time; the app's own packaged data (the log source
+# catalog) lives under backend/app/catalog and is always shipped.
 /.git
 /.github
 /data
