@@ -1,12 +1,16 @@
-.git
-.github
-data
-backend/.venv
-backend/tests
-backend/.pytest_cache
-frontend/node_modules
-frontend/dist
-docs
+# Anchored to the build-context root with a leading slash so these never match
+# same-named directories deeper in the tree (e.g. backend/app/data, which ships
+# the log source catalog and MUST be included in the image).
+/.git
+/.github
+/data
+/docs
+/backend/.venv
+/backend/tests
+/backend/.pytest_cache
+/frontend/node_modules
+/frontend/dist
 **/__pycache__
 *.db
+*.sqlite3
 .env
