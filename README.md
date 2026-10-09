@@ -47,8 +47,11 @@ and the log sources whose onboarding would unlock the most techniques.
 
 ```bash
 docker compose up --build -d
-# open http://localhost:8000
+# open http://localhost:9000
 ```
+
+The app is published on host port **9000** by default (container port 8000). Change the host port with
+`LCM_HOST_PORT`, e.g. `LCM_HOST_PORT=8080 docker compose up -d` (PowerShell: `$env:LCM_HOST_PORT="8080"`).
 
 Behind a TLS-inspecting corporate proxy, hand the build its CA bundle and (if needed) the proxy address:
 
@@ -57,7 +60,7 @@ CA_BUNDLE_FILE=/path/to/corp-ca.pem HTTPS_PROXY=http://proxy:3128 docker compose
 ```
 
 If the container cannot reach GitHub to download the ATT&CK bundle, drop a copy into the data volume and
-re-import: `docker compose cp enterprise-attack.json app:/data/` then `curl -X POST localhost:8000/api/attack/import`.
+re-import: `docker compose cp enterprise-attack.json app:/data/` then `curl -X POST localhost:9000/api/attack/import`.
 
 ### Local
 

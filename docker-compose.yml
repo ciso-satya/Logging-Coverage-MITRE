@@ -7,7 +7,7 @@ services:
     image: attack-logging-coverage:latest
     container_name: attack-logging-coverage
     ports:
-      - "8000:8000"
+      - "${LCM_HOST_PORT:-9000}:8000"
     environment:
       # Generate with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
       LCM_SECRET_KEY: ${LCM_SECRET_KEY:-}
