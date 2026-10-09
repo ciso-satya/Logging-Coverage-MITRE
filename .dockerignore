@@ -1,0 +1,17 @@
+# Anchored to the build-context root with a leading slash so these never match
+# same-named directories deeper in the tree. /data is the runtime DB + ATT&CK
+# cache dir, created at run time; the app's own packaged data (the log source
+# catalog) lives under backend/app/catalog and is always shipped.
+/.git
+/.github
+/data
+/docs
+/backend/.venv
+/backend/tests
+/backend/.pytest_cache
+/frontend/node_modules
+/frontend/dist
+**/__pycache__
+*.db
+*.sqlite3
+.env

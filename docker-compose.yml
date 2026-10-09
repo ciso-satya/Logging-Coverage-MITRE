@@ -1,18 +1,30 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      secrets:
+        - ca_bundle
     image: attack-logging-coverage:latest
     container_name: attack-logging-coverage
     ports:
-      - "8000:8000"
+      - "${LCM_HOST_PORT:-9000}:8000"
     environment:
       # Generate with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
       LCM_SECRET_KEY: ${LCM_SECRET_KEY:-}
       LCM_SYNC_INTERVAL_MINUTES: ${LCM_SYNC_INTERVAL_MINUTES:-60}
       LCM_SEED_DEMO: ${LCM_SEED_DEMO:-true}
+      # Optional outbound proxy for the ATT&CK download and SIEM API calls
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
     volumes:
       - lcm-data:/data
     restart: unless-stopped
+
+secrets:
+  # CA bundle for TLS-inspecting corporate proxies. The default is an empty file (no-op).
+  ca_bundle:
+    file: ${CA_BUNDLE_FILE:-./docker/ca-bundle.crt}
 
 volumes:
   lcm-data:

@@ -10,7 +10,7 @@ from pathlib import Path
 from ..attack.parser import normalize_log_source_name
 from ..models import LogSource, MappingOverride
 
-CATALOG_PATH = Path(__file__).resolve().parent.parent / "data" / "log_source_catalog.json"
+CATALOG_PATH = Path(__file__).resolve().parent.parent / "catalog" / "log_source_catalog.json"
 
 
 @dataclass(frozen=True)
