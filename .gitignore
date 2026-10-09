@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# App data (SQLite DB, cached ATT&CK bundle, generated secret key)
+data/
+backend/data/
+*.db
+*.sqlite3
+.env
+.secret_key
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
