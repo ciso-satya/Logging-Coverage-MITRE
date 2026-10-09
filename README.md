@@ -46,9 +46,18 @@ and the log sources whose onboarding would unlock the most techniques.
 ### Docker (recommended)
 
 ```bash
-docker compose up --build
+docker compose up --build -d
 # open http://localhost:8000
 ```
+
+Behind a TLS-inspecting corporate proxy, hand the build its CA bundle and (if needed) the proxy address:
+
+```bash
+CA_BUNDLE_FILE=/path/to/corp-ca.pem HTTPS_PROXY=http://proxy:3128 docker compose up --build -d
+```
+
+If the container cannot reach GitHub to download the ATT&CK bundle, drop a copy into the data volume and
+re-import: `docker compose cp enterprise-attack.json app:/data/` then `curl -X POST localhost:8000/api/attack/import`.
 
 ### Local
 

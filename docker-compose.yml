@@ -1,6 +1,9 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      secrets:
+        - ca_bundle
     image: attack-logging-coverage:latest
     container_name: attack-logging-coverage
     ports:
@@ -10,9 +13,18 @@ services:
       LCM_SECRET_KEY: ${LCM_SECRET_KEY:-}
       LCM_SYNC_INTERVAL_MINUTES: ${LCM_SYNC_INTERVAL_MINUTES:-60}
       LCM_SEED_DEMO: ${LCM_SEED_DEMO:-true}
+      # Optional outbound proxy for the ATT&CK download and SIEM API calls
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
     volumes:
       - lcm-data:/data
     restart: unless-stopped
+
+secrets:
+  # CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.
+  ca_bundle:
+    file: ${CA_BUNDLE_FILE:-/dev/null}
 
 volumes:
   lcm-data:
