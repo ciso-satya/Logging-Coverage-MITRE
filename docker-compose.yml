@@ -1,30 +1,30 @@
 services:
-  app:
-    build:
-      context: .
-      secrets:
-        - ca_bundle
-    image: attack-logging-coverage:latest
-    container_name: attack-logging-coverage
-    ports:
-      - "8000:8000"
-    environment:
-      # Generate with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-      LCM_SECRET_KEY: ${LCM_SECRET_KEY:-}
-      LCM_SYNC_INTERVAL_MINUTES: ${LCM_SYNC_INTERVAL_MINUTES:-60}
-      LCM_SEED_DEMO: ${LCM_SEED_DEMO:-true}
-      # Optional outbound proxy for the ATT&CK download and SIEM API calls
-      HTTPS_PROXY: ${HTTPS_PROXY:-}
-      HTTP_PROXY: ${HTTP_PROXY:-}
-      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
-    volumes:
-      - lcm-data:/data
-    restart: unless-stopped
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.app:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  build:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    context: .
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    secrets:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.      - ca_bundle
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  image: attack-logging-coverage:latest
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  container_name: attack-logging-coverage
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  ports:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    - "8000:8000"
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  environment:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    # Generate with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    LCM_SECRET_KEY: ${LCM_SECRET_KEY:-}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    LCM_SYNC_INTERVAL_MINUTES: ${LCM_SYNC_INTERVAL_MINUTES:-60}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    LCM_SEED_DEMO: ${LCM_SEED_DEMO:-true}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    # Optional outbound proxy for the ATT&CK download and SIEM API calls
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    HTTPS_PROXY: ${HTTPS_PROXY:-}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    HTTP_PROXY: ${HTTP_PROXY:-}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  volumes:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.    - lcm-data:/data
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  restart: unless-stopped
 
 secrets:
-  # CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.
-  ca_bundle:
-    file: ${CA_BUNDLE_FILE:-/dev/null}
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.# CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.ca_bundle:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.  file: ${CA_BUNDLE_FILE:-./docker/ca-bundle.crt}
 
 volumes:
-  lcm-data:
+ CA bundle for TLS-inspecting corporate proxies; leave unset when you have none.lcm-data:
